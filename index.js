@@ -6,6 +6,7 @@ const processes = [
   { id: "P4", arrivalTime: 0, burstTime: 5 },
 ];
 
+// function para sa calculation
 const fcfs = (processes) => {
   // sort ang processes based sa ila arrival time
   const sortedProcesses = processes.toSorted(
@@ -31,15 +32,17 @@ const fcfs = (processes) => {
     };
   });
 
-  // kuhaon ang average sa turnaround ug waiting times
+  // e add tanan turnaround times
   const sumOfTurnaroundTime = result.reduce((acc, currValue) => {
     return acc + currValue.turnaroundTime;
   }, 0);
 
+  // e add tanan waiting times
   const sumOfWaitingTime = result.reduce((acc, currValue) => {
     return acc + currValue.waitingTime;
   }, 0);
 
+  // kuhaon ang average sa sum of turnaround and waiting time
   const avgTurnaroundTime = sumOfTurnaroundTime / result.length;
   const avgWaitingTime = sumOfWaitingTime / result.length;
 
