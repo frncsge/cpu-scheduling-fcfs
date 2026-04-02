@@ -39,20 +39,35 @@ function deleteProcess(index) {
 }
 
 /* ===== RENDER TABLE ===== */
+const tbody = document.querySelector("#processTable tbody");
+
+// event delegation: add event listener to tbody but only
+// respond if the element clicked inside of it is the delete button
+tbody.addEventListener("click", (e) => {
+  if (
+    e.target.tagName === "BUTTON" &&
+    e.target.classList.contains("btn-danger")
+  ) {
+    const row = e.target.closest("tr");
+    const index = Array.from(tbody.children).indexOf(row);
+    deleteProcess(index);
+  }
+});
+
 function renderTable() {
-  const tbody = document.querySelector("#processTable tbody");
   tbody.innerHTML = "";
 
-  processList.forEach((p, index) => {
-    const row = `
+  processList.forEach((p) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
       <tr>
         <td>${p.id}</td>
         <td>${p.arrivalTime}</td>
         <td>${p.burstTime}</td>
-        <td><button class="btn-danger" onclick="deleteProcess(${index})">X</button></td>
+        <td><button class="btn-danger">X</button></td>
       </tr>
     `;
-    tbody.innerHTML += row;
+    tbody.appendChild(row);
   });
 }
 
