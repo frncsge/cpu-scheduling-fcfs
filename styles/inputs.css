@@ -1,0 +1,40 @@
+/* ===== INPUTS ===== */
+.input-group {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+input {
+  padding: 10px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+.btn-primary {
+  background: #6c63ff;
+  color: white;
+}
+.btn-danger {
+  background: #ff5c5c;
+  color: white;
+}
+.btn-success {
+  background: #00c896;
+  color: white;
+}
