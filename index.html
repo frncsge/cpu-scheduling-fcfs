@@ -1,245 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>FCFS Scheduling Simulator</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FCFS Scheduling Simulator</title>
 
-<style>
-/* ===== GLOBAL ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Segoe UI", sans-serif;
-}
+    <style>
+      /* ===== GLOBAL ===== */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", sans-serif;
+      }
 
-body {
-  background: linear-gradient(135deg, #1e1e2f, #2b2b45);
-  color: #fff;
-  min-height: 100vh;
-  padding: 20px;
-}
+      body {
+        background: linear-gradient(135deg, #1e1e2f, #2b2b45);
+        color: #fff;
+        min-height: 100vh;
+        padding: 20px;
+      }
 
-/* ===== HEADER ===== */
-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
+      /* ===== HEADER ===== */
+      header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-header h1 {
-  font-size: 2rem;
-  font-weight: 600;
-}
+      header h1 {
+        font-size: 2rem;
+        font-weight: 600;
+      }
 
-header p {
-  opacity: 0.7;
-}
+      header p {
+        opacity: 0.7;
+      }
 
-/* ===== CARD ===== */
-.card {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-  margin-bottom: 20px;
-  transition: 0.3s ease;
-}
+      /* ===== CARD ===== */
+      .card {
+        background: rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        margin-bottom: 20px;
+        transition: 0.3s ease;
+      }
 
-.card:hover {
-  transform: translateY(-3px);
-}
+      .card:hover {
+        transform: translateY(-3px);
+      }
 
-/* ===== INPUTS ===== */
-.input-group {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
+      /* ===== INPUTS ===== */
+      .input-group {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
 
-input {
-  padding: 10px;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background: rgba(255,255,255,0.1);
-  color: white;
-}
+      input {
+        padding: 10px;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        background: rgba(255, 255, 255, 0.1);
+        color: white;
+      }
 
-button {
-  padding: 10px 15px;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: 0.3s;
-}
+      button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
 
-button:hover {
-  transform: scale(1.05);
-}
+      button:hover {
+        transform: scale(1.05);
+      }
 
-.btn-primary { background: #6c63ff; color: white; }
-.btn-danger { background: #ff5c5c; color: white; }
-.btn-success { background: #00c896; color: white; }
+      .btn-primary {
+        background: #6c63ff;
+        color: white;
+      }
+      .btn-danger {
+        background: #ff5c5c;
+        color: white;
+      }
+      .btn-success {
+        background: #00c896;
+        color: white;
+      }
 
-/* ===== TABLE ===== */
-table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 10px;
-}
+      /* ===== TABLE ===== */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
 
-th, td {
-  padding: 10px;
-  text-align: center;
-}
+      th,
+      td {
+        padding: 10px;
+        text-align: center;
+      }
 
-tr {
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-}
+      tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
 
-/* ===== GANTT ===== */
-#gantt {
-  display: flex;
-  margin-top: 20px;
-  overflow-x: auto;
-}
+      /* ===== GANTT ===== */
+      #gantt {
+        display: flex;
+        margin-top: 20px;
+        overflow-x: auto;
+      }
 
-.bar {
-  padding: 10px;
-  margin-right: 2px;
-  text-align: center;
-  border-radius: 6px;
-  color: black;
-  font-weight: bold;
-  animation: fadeIn 0.5s ease forwards;
-}
+      .bar {
+        padding: 10px;
+        margin-right: 2px;
+        text-align: center;
+        border-radius: 6px;
+        color: black;
+        font-weight: bold;
+        animation: fadeIn 0.5s ease forwards;
+      }
 
-/* ===== ANIMATION ===== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.9); }
-  to { opacity: 1; transform: scale(1); }
-}
+      /* ===== ANIMATION ===== */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: scale(0.9);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
 
-/* ===== LOADER ===== */
-.loader {
-  display: none;
-  text-align: center;
-  margin-top: 10px;
-}
+      /* ===== LOADER ===== */
+      .loader {
+        display: none;
+        text-align: center;
+        margin-top: 10px;
+      }
 
-.loader.active {
-  display: block;
-}
+      .loader.active {
+        display: block;
+      }
 
-/* ===== RESPONSIVE ===== */
-@media(max-width: 600px){
-  .input-group {
-    flex-direction: column;
-  }
-}
-</style>
-</head>
+      /* ===== RESPONSIVE ===== */
+      @media (max-width: 600px) {
+        .input-group {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
 
-<body>
+  <body>
+    <header>
+      <h1>FCFS Scheduling Simulator</h1>
+      <p>Visualize First Come First Serve CPU Scheduling</p>
+    </header>
 
-<header>
-  <h1>FCFS Scheduling Simulator</h1>
-  <p>Visualize First Come First Serve CPU Scheduling</p>
-</header>
+    <!-- INPUT CARD -->
+    <div class="card">
+      <div class="input-group">
+        <input type="text" id="pid" placeholder="Process ID" />
+        <input type="number" id="arrival" placeholder="Arrival Time" />
+        <input type="number" id="burst" placeholder="Burst Time" />
 
-<!-- INPUT CARD -->
-<div class="card">
-  <div class="input-group">
-    <input type="text" id="pid" placeholder="Process ID">
-    <input type="number" id="arrival" placeholder="Arrival Time">
-    <input type="number" id="burst" placeholder="Burst Time">
-    
-    <button class="btn-primary" onclick="addProcess()">Add</button>
-    <button class="btn-danger" onclick="clearAll()">Clear</button>
-    <button class="btn-success" onclick="runSimulation()">Run</button>
-  </div>
-</div>
+        <button class="btn-primary" onclick="addProcess()">Add</button>
+        <button class="btn-danger" onclick="clearAll()">Clear</button>
+        <button class="btn-success" onclick="runSimulation()">Run</button>
+      </div>
+    </div>
 
-<!-- PROCESS TABLE -->
-<div class="card">
-  <h3>Processes</h3>
-  <table id="processTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Arrival</th>
-        <th>Burst</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-</div>
+    <!-- PROCESS TABLE -->
+    <div class="card">
+      <h3>Processes</h3>
+      <table id="processTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Arrival</th>
+            <th>Burst</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
 
-<!-- RESULTS -->
-<div class="card">
-  <h3>Results</h3>
-  <div class="loader" id="loader">Calculating...</div>
-  <table id="resultTable">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Start</th>
-        <th>Completion</th>
-        <th>Turnaround</th>
-        <th>Waiting</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+    <!-- RESULTS -->
+    <div class="card">
+      <h3>Results</h3>
+      <div class="loader" id="loader">Calculating...</div>
+      <table id="resultTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Start</th>
+            <th>Completion</th>
+            <th>Turnaround</th>
+            <th>Waiting</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
 
-  <p id="averages"></p>
+      <p id="averages"></p>
 
-  <div id="gantt"></div>
-</div>
+      <div id="gantt"></div>
+    </div>
 
-<script>
-let processList = [];
+    <script>
+      let processList = [];
 
-/* ===== ADD PROCESS ===== */
-function addProcess() {
-  const id = document.getElementById("pid").value.trim();
-  const arrival = parseInt(document.getElementById("arrival").value);
-  const burst = parseInt(document.getElementById("burst").value);
+      /* ===== ADD PROCESS ===== */
+      function addProcess() {
+        const id = document.getElementById("pid").value.trim();
+        const arrival = parseInt(document.getElementById("arrival").value);
+        const burst = parseInt(document.getElementById("burst").value);
 
-  if (!id || arrival < 0 || burst <= 0) {
-    alert("Invalid input!");
-    return;
-  }
+        if (!id || arrival < 0 || burst <= 0) {
+          alert("Invalid input!");
+          return;
+        }
 
-  processList.push({ id, arrivalTime: arrival, burstTime: burst });
-  renderTable();
-}
+        processList.push({ id, arrivalTime: arrival, burstTime: burst });
+        renderTable();
+      }
 
-/* ===== CLEAR ===== */
-function clearAll() {
-  processList = [];
-  renderTable();
-  document.querySelector("#resultTable tbody").innerHTML = "";
-  document.getElementById("gantt").innerHTML = "";
-  document.getElementById("averages").innerHTML = "";
-}
+      /* ===== CLEAR ===== */
+      function clearAll() {
+        processList = [];
+        renderTable();
+        document.querySelector("#resultTable tbody").innerHTML = "";
+        document.getElementById("gantt").innerHTML = "";
+        document.getElementById("averages").innerHTML = "";
+      }
 
-/* ===== DELETE ===== */
-function deleteProcess(index) {
-  processList.splice(index, 1);
-  renderTable();
-}
+      /* ===== DELETE ===== */
+      function deleteProcess(index) {
+        processList.splice(index, 1);
+        renderTable();
+      }
 
-/* ===== RENDER TABLE ===== */
-function renderTable() {
-  const tbody = document.querySelector("#processTable tbody");
-  tbody.innerHTML = "";
+      /* ===== RENDER TABLE ===== */
+      function renderTable() {
+        const tbody = document.querySelector("#processTable tbody");
+        tbody.innerHTML = "";
 
-  processList.forEach((p, index) => {
-    const row = `
+        processList.forEach((p, index) => {
+          const row = `
       <tr>
         <td>${p.id}</td>
         <td>${p.arrivalTime}</td>
@@ -247,56 +262,66 @@ function renderTable() {
         <td><button class="btn-danger" onclick="deleteProcess(${index})">X</button></td>
       </tr>
     `;
-    tbody.innerHTML += row;
-  });
-}
+          tbody.innerHTML += row;
+        });
+      }
 
-/* ===== FCFS ===== */
-function fcfs(processes) {
-  const sorted = [...processes].sort((a,b) => a.arrivalTime - b.arrivalTime);
+      /* ===== FCFS ===== */
+      function fcfs(processes) {
+        const sorted = [...processes].sort(
+          (a, b) => a.arrivalTime - b.arrivalTime,
+        );
 
-  let currentTime = 0;
+        let currentTime = 0;
 
-  const result = sorted.map(p => {
-    const startTime = Math.max(currentTime, p.arrivalTime);
-    const completionTime = startTime + p.burstTime;
-    const turnaroundTime = completionTime - p.arrivalTime;
-    const waitingTime = turnaroundTime - p.burstTime;
+        const result = sorted.map((p) => {
+          const startTime = Math.max(currentTime, p.arrivalTime);
+          const completionTime = startTime + p.burstTime;
+          const turnaroundTime = completionTime - p.arrivalTime;
+          const waitingTime = turnaroundTime - p.burstTime;
 
-    currentTime = completionTime;
+          currentTime = completionTime;
 
-    return { ...p, startTime, completionTime, turnaroundTime, waitingTime };
-  });
+          return {
+            ...p,
+            startTime,
+            completionTime,
+            turnaroundTime,
+            waitingTime,
+          };
+        });
 
-  const avgTAT = result.reduce((a,b)=>a+b.turnaroundTime,0)/result.length;
-  const avgWT = result.reduce((a,b)=>a+b.waitingTime,0)/result.length;
+        const avgTAT =
+          result.reduce((a, b) => a + b.turnaroundTime, 0) / result.length;
+        const avgWT =
+          result.reduce((a, b) => a + b.waitingTime, 0) / result.length;
 
-  return { result, avgTAT, avgWT };
-}
+        return { result, avgTAT, avgWT };
+      }
 
-/* ===== RUN ===== */
-function runSimulation() {
-  if (processList.length === 0) return;
+      /* ===== RUN ===== */
+      function runSimulation() {
+        if (processList.length === 0) return;
 
-  document.getElementById("loader").classList.add("active");
+        document.getElementById("loader").classList.add("active");
 
-  setTimeout(() => {
-    const { result, avgTAT, avgWT } = fcfs(processList);
+        setTimeout(() => {
+          const { result, avgTAT, avgWT } = fcfs(processList);
 
-    renderResults(result, avgTAT, avgWT);
-    renderGantt(result);
+          renderResults(result, avgTAT, avgWT);
+          renderGantt(result);
 
-    document.getElementById("loader").classList.remove("active");
-  }, 500);
-}
+          document.getElementById("loader").classList.remove("active");
+        }, 500);
+      }
 
-/* ===== RENDER RESULTS ===== */
-function renderResults(data, avgTAT, avgWT) {
-  const tbody = document.querySelector("#resultTable tbody");
-  tbody.innerHTML = "";
+      /* ===== RENDER RESULTS ===== */
+      function renderResults(data, avgTAT, avgWT) {
+        const tbody = document.querySelector("#resultTable tbody");
+        tbody.innerHTML = "";
 
-  data.forEach(p => {
-    tbody.innerHTML += `
+        data.forEach((p) => {
+          tbody.innerHTML += `
       <tr>
         <td>${p.id}</td>
         <td>${p.startTime}</td>
@@ -305,30 +330,29 @@ function renderResults(data, avgTAT, avgWT) {
         <td>${p.waitingTime}</td>
       </tr>
     `;
-  });
+        });
 
-  document.getElementById("averages").innerHTML =
-    `Avg TAT: ${avgTAT.toFixed(2)} | Avg WT: ${avgWT.toFixed(2)}`;
-}
+        document.getElementById("averages").innerHTML =
+          `Avg TAT: ${avgTAT.toFixed(2)} | Avg WT: ${avgWT.toFixed(2)}`;
+      }
 
-/* ===== GANTT ===== */
-function renderGantt(data) {
-  const gantt = document.getElementById("gantt");
-  gantt.innerHTML = "";
+      /* ===== GANTT ===== */
+      function renderGantt(data) {
+        const gantt = document.getElementById("gantt");
+        gantt.innerHTML = "";
 
-  data.forEach((p, i) => {
-    const color = `hsl(${i * 60}, 70%, 70%)`;
+        data.forEach((p, i) => {
+          const color = `hsl(${i * 60}, 70%, 70%)`;
 
-    const bar = document.createElement("div");
-    bar.className = "bar";
-    bar.style.background = color;
-    bar.style.flex = p.burstTime;
-    bar.innerHTML = `${p.id}<br>${p.startTime}-${p.completionTime}`;
+          const bar = document.createElement("div");
+          bar.className = "bar";
+          bar.style.background = color;
+          bar.style.flex = p.burstTime;
+          bar.innerHTML = `${p.id}<br>${p.startTime}-${p.completionTime}`;
 
-    gantt.appendChild(bar);
-  });
-}
-</script>
-
-</body>
+          gantt.appendChild(bar);
+        });
+      }
+    </script>
+  </body>
 </html>
