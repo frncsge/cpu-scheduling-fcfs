@@ -15,6 +15,9 @@ function addProcess() {
   renderTable();
 }
 
+const addBtn = document.getElementById("addBtn");
+addBtn.addEventListener("click", addProcess);
+
 /* ===== CLEAR ===== */
 function clearAll() {
   processList = [];
@@ -23,6 +26,9 @@ function clearAll() {
   document.getElementById("gantt").innerHTML = "";
   document.getElementById("averages").innerHTML = "";
 }
+
+const clearBtn = document.getElementById("clearBtn");
+clearBtn.addEventListener("click", clearAll);
 
 /* ===== DELETE ===== */
 function deleteProcess(index) {
@@ -93,6 +99,9 @@ function runSimulation() {
     document.getElementById("loader").classList.remove("active");
   }, 500);
 }
+
+const runBtn = document.getElementById("runBtn");
+runBtn.addEventListener("click", runSimulation);
 
 /* ===== RENDER RESULTS ===== */
 function renderResults(data, avgTAT, avgWT) {
