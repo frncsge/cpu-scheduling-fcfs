@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FCFS Scheduling Simulator</title>
+    <link rel="stylesheet" href="./styles/index.css" />
+    <link rel="stylesheet" href="./styles/card.css" />
+    <link rel="stylesheet" href="./styles/inputs.css" />
+    <link rel="stylesheet" href="./styles/table.css" />
+    <link rel="stylesheet" href="./styles/gantt.css" />
+    <link rel="stylesheet" href="./styles/animation.css" />
+    <link rel="stylesheet" href="./styles/loader.css" />
+    <link rel="stylesheet" href="./styles/responsive.css" />
+  </head>
+
+  <body>
+    <header>
+      <h1>FCFS Scheduling Simulator</h1>
+      <p>Visualize First Come First Serve CPU Scheduling</p>
+    </header>
+
+    <!-- INPUT CARD -->
+    <div class="card">
+      <div class="input-group">
+        <input type="text" id="pid" placeholder="Process ID" />
+        <input type="number" id="arrival" placeholder="Arrival Time" />
+        <input type="number" id="burst" placeholder="Burst Time" />
+
+        <button class="btn-primary" id="addBtn">Add</button>
+        <button class="btn-danger" id="clearBtn">Clear</button>
+        <button class="btn-success" id="runBtn">Run</button>
+      </div>
+    </div>
+
+    <!-- PROCESS TABLE -->
+    <div class="card">
+      <h3>Processes</h3>
+      <table id="processTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Arrival</th>
+            <th>Burst</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="card">
+      <h3>Results</h3>
+      <div class="loader" id="loader">Calculating...</div>
+      <table id="resultTable">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Start</th>
+            <th>Completion</th>
+            <th>Turnaround</th>
+            <th>Waiting</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+
+      <p id="averages"></p>
+
+      <div id="gantt"></div>
+    </div>
+
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>

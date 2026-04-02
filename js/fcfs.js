@@ -1,11 +1,3 @@
-// temporary input ra ni for testing onleee
-const processes = [
-  { id: "P1", arrivalTime: 0, burstTime: 10 },
-  { id: "P2", arrivalTime: 0, burstTime: 4 },
-  { id: "P3", arrivalTime: 0, burstTime: 7 },
-  { id: "P4", arrivalTime: 0, burstTime: 5 },
-];
-
 // function para sa calculation
 const fcfs = (processes) => {
   // sort ang processes based sa ila arrival time
@@ -43,14 +35,14 @@ const fcfs = (processes) => {
   }, 0);
 
   // kuhaon ang average sa sum of turnaround and waiting time
-  const avgTurnaroundTime = sumOfTurnaroundTime / result.length;
-  const avgWaitingTime = sumOfWaitingTime / result.length;
+  const avgTAT = sumOfTurnaroundTime / result.length;
+  const avgWT = sumOfWaitingTime / result.length;
 
   return {
     result,
-    avgTurnaroundTime,
-    avgWaitingTime,
+    avgTAT,
+    avgWT,
   };
 };
 
-console.log(fcfs(processes));
+export default fcfs;

@@ -1,0 +1,10 @@
+/* ===== LOADER ===== */
+.loader {
+  display: none;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.loader.active {
+  display: block;
+}
