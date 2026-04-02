@@ -1,3 +1,5 @@
+import fcfs from "./fcfs.js";
+
 let processList = [];
 
 /* ===== ADD PROCESS ===== */
@@ -52,36 +54,6 @@ function renderTable() {
     `;
     tbody.innerHTML += row;
   });
-}
-
-/* ===== FCFS ===== */
-function fcfs(processes) {
-  const sorted = [...processes].sort((a, b) => a.arrivalTime - b.arrivalTime);
-
-  let currentTime = 0;
-
-  const result = sorted.map((p) => {
-    const startTime = Math.max(currentTime, p.arrivalTime);
-    const completionTime = startTime + p.burstTime;
-    const turnaroundTime = completionTime - p.arrivalTime;
-    const waitingTime = turnaroundTime - p.burstTime;
-
-    currentTime = completionTime;
-
-    return {
-      ...p,
-      startTime,
-      completionTime,
-      turnaroundTime,
-      waitingTime,
-    };
-  });
-
-  const avgTAT =
-    result.reduce((a, b) => a + b.turnaroundTime, 0) / result.length;
-  const avgWT = result.reduce((a, b) => a + b.waitingTime, 0) / result.length;
-
-  return { result, avgTAT, avgWT };
 }
 
 /* ===== RUN ===== */
