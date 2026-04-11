@@ -14,3 +14,12 @@
   font-weight: bold;
   animation: fadeIn 0.5s ease forwards;
 }
+
+.gantt-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.gantt-info span:only-child {
+  margin-left: auto;
+}
