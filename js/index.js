@@ -119,12 +119,31 @@ function renderGantt(data) {
   data.forEach((p, i) => {
     const color = `hsl(${i * 60}, 70%, 70%)`;
 
+    const item = document.createElement("div");
+    item.className = "gantt-item";
+    item.style.flex = p.burstTime;
+
     const bar = document.createElement("div");
     bar.className = "bar";
     bar.style.background = color;
-    bar.style.flex = p.burstTime;
-    bar.innerHTML = `${p.id}<br>${p.startTime}-${p.completionTime}`;
+    bar.innerHTML = `${p.id}`;
 
-    gantt.appendChild(bar);
+    const info = document.createElement("div");
+    info.className = "gantt-info";
+
+    if (i === 0) {
+      const start = document.createElement("span");
+      start.textContent = p.startTime;
+      info.appendChild(start);
+    }
+
+    const end = document.createElement("span");
+    end.textContent = p.completionTime;
+    info.appendChild(end);
+
+    item.appendChild(bar);
+    item.appendChild(info);
+
+    gantt.appendChild(item);
   });
 }
