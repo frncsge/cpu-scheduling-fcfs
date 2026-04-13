@@ -4,17 +4,43 @@ let processList = [];
 
 /* ===== ADD PROCESS ===== */
 function addProcess() {
-  const id = document.getElementById("pid").value.trim();
-  const arrival = parseInt(document.getElementById("arrival").value);
-  const burst = parseInt(document.getElementById("burst").value);
+  const arrival = document.getElementById("arrival").value.trim();
+  const burst = document.getElementById("burst").value.trim();
 
-  if (!id || arrival < 0 || burst <= 0) {
-    alert("Invalid input!");
+  const arrivalArr = parseInput(arrival);
+  const burstArr = parseInput(burst);
+
+  // prevent invali inputs
+  if (!arrivalArr || !burstArr) {
+    alert("Invalid input: Please enter valid numbers only.");
+  }
+
+  // user must enter same number of values
+  if (arrivalArr.length !== burstArr.length) {
+    alert(
+      "Invalid input: Arrival and Burst times must have the same number of values.",
+    );
     return;
   }
 
-  processList.push({ id, arrivalTime: arrival, burstTime: burst });
+  processList = arrivalArr.map((value, i) => ({
+    id: String.fromCharCode(97 + i), // 97 = 'a'
+    arrivalTime: value,
+    burstTime: burstArr[i],
+  }));
+
   renderTable();
+}
+
+function parseInput(input) {
+  const inputArr = input.split(/\s+/);
+  const parsedInputArr = inputArr.map(Number);
+
+  const isValid = parsedInputArr.every((n) => !isNaN(n));
+
+  if (!isValid) return false;
+
+  return parsedInputArr;
 }
 
 const addBtn = document.getElementById("addBtn");
