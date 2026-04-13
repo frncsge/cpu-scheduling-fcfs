@@ -38,3 +38,9 @@ button:hover {
   background: #00c896;
   color: white;
 }
+#input-instruction {
+  display: inline-block;
+  color: rgba(240, 255, 255, 0.561);
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
