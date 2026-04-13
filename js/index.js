@@ -99,7 +99,8 @@ function renderResults(data, avgTAT, avgWT) {
     tbody.innerHTML += `
       <tr>
         <td>${p.id}</td>
-        <td>${p.startTime}</td>
+        <td>${p.arrivalTime}</td>
+        <td>${p.burstTime}</td>
         <td>${p.completionTime}</td>
         <td>${p.turnaroundTime}</td>
         <td>${p.waitingTime}</td>
@@ -108,7 +109,7 @@ function renderResults(data, avgTAT, avgWT) {
   });
 
   document.getElementById("averages").innerHTML =
-    `Avg TAT: ${avgTAT.toFixed(2)} | Avg WT: ${avgWT.toFixed(2)}`;
+    `Avg Turnaround Time: <b>${avgTAT.toFixed(2)}</b> | Avg Waiting Time: <b>${avgWT.toFixed(2)}</b>`;
 }
 
 /* ===== GANTT ===== */
