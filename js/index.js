@@ -7,12 +7,19 @@ function addProcess() {
   const arrival = document.getElementById("arrival").value.trim();
   const burst = document.getElementById("burst").value.trim();
 
+  // prevent zero input
+  if (!arrival || !burst) {
+    alert("Input cannot be empty. Please enter arrival and burst times.");
+    return;
+  }
+
   const arrivalArr = parseInput(arrival);
   const burstArr = parseInput(burst);
 
   // prevent invali inputs
   if (!arrivalArr || !burstArr) {
     alert("Invalid input: Please enter valid numbers only.");
+    return;
   }
 
   // user must enter same number of values
